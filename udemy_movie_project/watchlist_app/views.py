@@ -14,4 +14,15 @@ def movie_list(request):
     # Need to be returned as json.
     data = {'movies': list(movies.values())}
 
-    return JsonResponse(list(movies.values()), safe=False)
+    return JsonResponse(data)
+
+def movie_detail(request, pk):
+    #extract movie by id
+    movie_detail = Movie.objects.get(pk=pk)
+    # data = {"description": movie_detail.description}
+    data = {
+        "title": movie_detail.title,
+        "description": movie_detail.description,
+        "active": movie_detail.active
+    }
+    return JsonResponse(data)
