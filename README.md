@@ -1,2 +1,1 @@
-# first_api
-this API is the first one that I've built, based off a Udemy course.
+A Django REST API for a movie database, built as my first venture into Python/Django development.
