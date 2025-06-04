@@ -10,7 +10,7 @@ def movie_list(request):
         movie = Movie.objects.all()
         # Use serializer
         serializer = MovieSerializer(movie, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=200)
     elif request.method == 'POST':
         serializer = MovieSerializer(data=request.data) # get data from user request
         if serializer.is_valid(): # data is considered valid if it's in the correct format
