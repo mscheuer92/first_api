@@ -1,3 +1,6 @@
+#### create a project in a directory:
+django-admin start project <projectname>
+
 #### To create an app: 
 
     python3 manage.py startapp <name>
