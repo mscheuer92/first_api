@@ -20,7 +20,3 @@ class MovieSerializer(serializers.Serializer):
         instance.active = validated_data.get('active', instance.active)
         instance.save()
         return instance
-
-    #This is the DELETE method for deleting an existing movie
-    def delete(self, instance):
-        t = "to do"
