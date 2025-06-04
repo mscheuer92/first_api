@@ -12,3 +12,15 @@ class MovieSerializer(serializers.Serializer):
         # validated data is passed to create method of Movie model
         return Movie.objects.create(**validated_data) # the ** operator unpacks the dictionary
     
+    # This is the PUT menthod for updating an existing movie
+    def update(self, instance, validated_data):
+        # instance is the movie object to be updated, validated_data is the new data
+        instance.title = validated_data.get('title', instance.title)
+        instance.description = validated_data.get('description', instance.description)
+        instance.active = validated_data.get('active', instance.active)
+        instance.save()
+        return instance
+
+    #This is the DELETE method for deleting an existing movie
+    def delete(self, instance):
+        t = "to do"

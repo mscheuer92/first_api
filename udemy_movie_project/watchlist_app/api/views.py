@@ -11,16 +11,33 @@ def movie_list(request):
         # Use serializer
         serializer = MovieSerializer(movie, many=True)
         return Response(serializer.data)
-    else:
-        serializer = MovieSerializer(data=request.data)
-
+    elif request.method == 'POST':
+        serializer = MovieSerializer(data=request.data) # get data from user request
+        if serializer.is_valid(): # data is considered valid if it's in the correct format
+            serializer.save()
+            return Response(serializer.data, status=201)
+        else:
+            return Response(serializer.errors)
 
 # return a single movie
-@api_view(['GET','POST'])
+@api_view(['GET','PUT','DELETE'])
 def movie_detail(request, pk):
-    movie = Movie.objects.get(pk=pk)
-    serializer = MovieSerializer(movie)
-    return Response(serializer.data)
+    match request.menthod:
+        case "GET":
+            movie = Movie.objects.get(pk=pk)
+            serializer = MovieSerializer(movie)
+            return Response(serializer.data)
+        case "PUT":
+            serializer = MovieSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            else:
+                return Response(serializer.errors)
+        case "DELETE":
+            serializer = Movie.objects.get(pk=pk).delete()
+            
+     
 
 # filter movies by title
 @api_view()
