@@ -9,9 +9,11 @@ class StreamPlatform(models.Model):
         return self.name
 
 class MediaType(models.Model): 
+    media_type = models.CharField(max_length=50, null=True, blank=True)
+    genre = models.CharField(max_length = 50, null=True, blank=True)
     title = models.CharField(max_length=100)
-    description = models.CharField(default=True, max_length=200)
-    active = models.BooleanField(default=True) # active = released
+    description = models.CharField(max_length=200)
+    active = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

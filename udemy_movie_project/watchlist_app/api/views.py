@@ -9,7 +9,7 @@ class StreamPlatformList(APIView):
         platform = StreamPlatform.objects.all()
         serializer = StreamPlatformSerializer(platform, many=True)
         return Response(serializer.data)    
-     
+    
     def post(self, request):
         serializer = StreamPlatformSerializer(data=request.data)
         if serializer.is_valid():
