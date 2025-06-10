@@ -1,25 +1,27 @@
 from rest_framework import serializers
-from watchlist_app.models import Movie
-#model serializer
+from watchlist_app.models import MediaType, StreamPlatform
 
-class MovieSerializer(serializers.ModelSerializer):
+# model serializer
+class MediaSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Movie
-        # fields = '__all__' # fields to be displayed in the response, if not specified, all fields will be displayed
+        model = MediaType
+        fields = '__all__' # fields to be displayed in the response, if not specified, all fields will be displayed
         # fields = ["id", "title", "description"]
-        exclude = ['active']
+        # exclude = ['active']
 
-    def validate_title(self, value):
-        if len(value) < 2:
-            raise serializers.ValidationError('The title must be at least 2 characters long.')
-        else:
-            return value
-    
-    # object level validation
-    def validate(self, data):
-        if data['title'] == data['description']:
-            raise serializers.ValidationError("The title and description cannot be the same.")
-        return data
+class StreamPlatformSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StreamPlatform
+    fields = '__all__'
+
+
+
+
+
+
+
+
+
 
 
 
